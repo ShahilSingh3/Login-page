@@ -3,20 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+<script>
+  gapi.load('auth2', function() {
+    gapi.auth2.init({
+      client_id: '396034959010-889h8sa5jkkp4ls4ukurq5gugdo3h6oe.apps.googleusercontent.com',
+    });
+  });
+</script>
+
     <title>Admin or Guest?</title>
     <style>
         body {
+            background-image:url("C:/Users/ssing/Desktop/Login page/bkgrndimg.jpg");
+            background-repeat:no-repeat;
+            background-size: cover;
+            background-position:center;
+            filter: blur(30%);
+            background-blend-mode: hue;
+            background-color: black;
             font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
             margin: 0;
             padding: 0;
             display: flex;
             justify-content: center;
             align-items: center;
+            flex-direction: column;
             height: 100vh;
         }
-
+        h2{
+            text-align:center;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            width: 300px;
+        }
         .login-container {
+            background-image: linear-gradient(rgb(231, 10, 231),rgb(98, 9, 233));
             text-align: center;
             background-color: #fff;
             border-radius: 5px;
@@ -25,9 +49,6 @@
             width: 300px;
         }
 
-        .login-container h2 {
-            margin-bottom: 20px;
-        }
 
         .login-container p {
             margin-bottom: 20px;
@@ -48,15 +69,32 @@
         .login-container button:hover {
             background-color: #0056b3;
         }
+        
     </style>
 </head>
 <body>
+    <div>
+    <h2>Welcome to the Web Application</h2>
+    </div>
     <div class="login-container">
-        <h2>Welcome to the Web Application</h2>
         <h3>Login</h3>
         <p>Are you an admin or a guest?</p>
         <button onclick="redirectToLogin('admin')">Admin</button>
         <button onclick="redirectToLogin('guest')">Guest</button>
+        <script src="https://accounts.google.com/gsi/client" async defer></script>
+        <div id="g_id_onload"
+           data-client_id="YOUR_GOOGLE_CLIENT_ID"
+           data-auto_prompt="false">
+        </div>
+        <div class="g_id_signin"
+           data-type="standard"
+           data-size="large"
+           data-theme="outline"
+           data-text="sign_in_with"
+           data-shape="rectangular"
+           data-logo_alignment="left">
+        </div>
+  
 
         <script>
             function redirectToLogin(userType) {
@@ -66,6 +104,18 @@
                     window.location.href = 'guest-login.html';
                 }
             }
+            function onSignIn(googleUser) {
+                // Handle the user's information, e.g., send it to your server for authentication.
+                var profile = googleUser.getBasicProfile();
+                console.log('ID: ' + profile.getId());
+                console.log('Name: ' + profile.getName());
+                console.log('Email: ' + profile.getEmail());
+                // You can also access the user's ID token for server-side verification.
+                var id_token = googleUser.getAuthResponse().id_token;
+                console.log('ID Token: ' + id_token);
+
+                // Redirect or perform other actions as needed.
+                }
         </script>
     </div>
 </body>
