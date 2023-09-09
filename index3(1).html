@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+<script>
+  gapi.load('auth2', function() {
+    gapi.auth2.init({
+      client_id: '396034959010-889h8sa5jkkp4ls4ukurq5gugdo3h6oe.apps.googleusercontent.com',
+    });
+  });
+</script>
+
+    <title>Admin or Guest?</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing: border-box;
+        }
+
+
+.login-container button:hover {
+    background-color: #0056b3;
+}
+
+        .main{
+            font-family: Arial, sans-serif;
+            margin:0;
+            padding:0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+        .main::before {
+            content: "";
+            background-image: url('bkgrndimg.jpg');
+            background-size: cover;
+            background-position: center;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            filter: blur(2px); /* Apply the blur effect to the pseudo-element */
+}
+        .overlay{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+            padding: 20px;
+            border-radius: 10px;
+        }
+        h2{
+            text-align:center;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            width: 300px;
+        }
+        .login-container {
+            margin-top:20px;
+            background-image: linear-gradient(rgb(225, 239, 171),rgba(202, 247, 113, 0.825)); /*applying linear 
+            gradient on the login div*/
+            text-align: center;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            width: 300px;
+        }
+
+
+        .login-container p {
+            margin-bottom: 20px;
+        }
+
+        .login-container button {
+            display: block;
+            margin: 10px auto;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .login-container button:hover {
+            background-color: #0056b3;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="main">
+    <div class="overlay">
+    <div>
+    <h2>Welcome to the Web Application</h2>
+    </div>
+    <div class="login-container">
+        <h3>Login</h3>
+        <p>Are you an admin or a guest?</p>
+        <button onclick="redirectToLogin('admin')">Admin</button>
+        <button onclick="redirectToLogin('guest')">Guest</button>
+        <script src="https://accounts.google.com/gsi/client" async defer></script>
+
+        <div id="g_id_onload"
+           data-client_id="396034959010-889h8sa5jkkp4ls4ukurq5gugdo3h6oe.apps.googleusercontent.com"
+           data-auto_prompt="false">
+        </div>
+        <div class="g_id_signin"
+           data-type="standard"
+           data-size="large"
+           data-theme="outline"
+           data-text="sign_in_with"
+           data-shape="rectangular"
+           data-logo_alignment="left">
+        </div>
+  
+
+        <script>
+            function redirectToLogin(userType) {
+                if (userType === 'admin') {
+                    window.location.href = 'admin-login.html';
+                } else if (userType === 'guest') {
+                    window.location.href = 'guest-login.html';
+                }
+            }
+            function onSignIn(googleUser) {
+                // Handle the user's information, e.g., send it to your server for authentication.
+                var profile = googleUser.getBasicProfile();
+                console.log('ID: ' + profile.getId());
+                console.log('Name: ' + profile.getName());
+                console.log('Email: ' + profile.getEmail());
+                // You can also access the user's ID token for server-side verification.
+                var id_token = googleUser.getAuthResponse().id_token;
+                console.log('ID Token: ' + id_token);
+
+                // Redirect or perform other actions as needed.
+                }
+        </script>
+    </div>
+    </div>
+    </div>
+</body>
+</html>
